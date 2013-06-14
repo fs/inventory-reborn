@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Room do
+describe Role do
   describe 'associations' do
-    it { should have_many :units }
+    it { should have_and_belong_to_many :users}
   end
 
   describe 'validations' do

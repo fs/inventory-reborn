@@ -1,3 +1,5 @@
 class Room < ActiveRecord::Base
-  validates :name, presence: true
+  has_many :units
+
+  validates :name, presence: true, uniqueness: true
 end

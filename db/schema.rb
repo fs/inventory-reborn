@@ -11,13 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614112947) do
+ActiveRecord::Schema.define(:version => 20130614124458) do
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id"
 
   create_table "rooms", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "units", :force => true do |t|
+    t.string   "unit_type"
+    t.integer  "inv_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "room_id"
+    t.boolean  "on_depot",          :default => false
+    t.boolean  "out_of_order",      :default => false
+    t.text     "out_of_order_note"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "units", ["inv_id", "room_id", "user_id"], :name => "index_units_on_inv_id_and_room_id_and_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
