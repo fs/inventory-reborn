@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     email
     password
+    full_name { Faker::Name.name }
 
     trait :with_roles do
       roles { [FactoryGirl.build(:role)] }
