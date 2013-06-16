@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(:version => 20130614124458) do
     t.integer "user_id"
   end
 
-  add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id"
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "rooms", :force => true do |t|
     t.string   "name"
@@ -46,7 +47,9 @@ ActiveRecord::Schema.define(:version => 20130614124458) do
     t.datetime "updated_at",                           :null => false
   end
 
-  add_index "units", ["inv_id", "room_id", "user_id"], :name => "index_units_on_inv_id_and_room_id_and_user_id"
+  add_index "units", ["inv_id"], :name => "index_units_on_inv_id"
+  add_index "units", ["room_id"], :name => "index_units_on_room_id"
+  add_index "units", ["user_id"], :name => "index_units_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

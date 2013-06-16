@@ -14,6 +14,8 @@ class CreateUnits < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :units, [:inv_id, :room_id, :user_id]
+    add_index :units, :inv_id
+    add_index :units, :room_id
+    add_index :units, :user_id
   end
 end
