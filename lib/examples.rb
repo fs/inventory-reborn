@@ -9,9 +9,18 @@ module Examples
     '123456'
   end
 
+  def room
+    Room.first
+  end
+
   def setup!
     ActiveRecord::Base.transaction do
       FactoryGirl.create :user
+      FactoryGirl.create :user, :admin
+
+      FactoryGirl.create :room
+
+      FactoryGirl.create_list :unit, 3, user: user, room: room
     end
   end
 end
