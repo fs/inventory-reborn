@@ -6,5 +6,8 @@ Rails3BaseApi::Application.routes.draw do
     post 'users/sign_in', to: 'sessions#create'
   end
 
-  mount ApiTaster::Engine => '/api_taster' if defined? ApiTaster::Engine
+  if defined? ApiTaster::Engine
+    mount ApiTaster::Engine => '/api_taster' if defined? ApiTaster::Engine
+    root to: ApiTaster::Engine
+  end
 end
