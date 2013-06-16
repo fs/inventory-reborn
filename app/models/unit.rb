@@ -6,26 +6,18 @@ class Unit < ActiveRecord::Base
 
   validates :inv_id, presence: true, uniqueness: true, numericality: true
   validates :name, :unit_type, :room, :user, presence: true
-  validates :out_of_order_note, presence: true, if: :out_of_order_note_requried?
+  validates :out_of_order_note, presence: true, if: proc { |u| u.out_of_order? }
 
-  before_validation :generate_next_inv_id
-  before_save :reassign_user_if_on_depot
+  before_validation :generate_next_inv_id, if: proc { |u| u.inv_id.blank? }
+  before_save :reassign_user, if: proc { |u| u.on_depot? }
 
   private
 
   def generate_next_inv_id
-    if inv_id.blank?
-      self.inv_id = self.class.maximum(:inv_id).to_i + 1
-    end
+    self.inv_id = self.class.maximum(:inv_id).to_i + 1
   end
 
-  def reassign_user_if_on_depot
-    if on_depot?
-      self.user = User.includes(:roles).where(roles: {name: 'admin'}).first
-    end
-  end
-
-  def out_of_order_note_requried?
-    out_of_order == true
+  def reassign_user
+    self.user = User.admins.first
   end
 end

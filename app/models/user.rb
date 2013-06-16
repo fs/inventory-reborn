@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
 
   before_save :ensure_authentication_token
+
+  scope :admins, includes(:roles).where(roles: {name: 'admin'})
 end
