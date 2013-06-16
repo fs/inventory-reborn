@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/fredwu/api_taster.git
+  remote: git://github.com/fredwu/api_taster.git
   revision: 39b288c351fe39c301bcb0ea6136b4653f24eceb
   specs:
     api_taster (0.6.0)
