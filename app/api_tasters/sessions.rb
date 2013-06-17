@@ -7,4 +7,4 @@ ApiTaster.routes do
     :email => Examples.user.email,
     :password => Examples.password
   }
-end
+end if defined? ApiTaster
