@@ -6,17 +6,8 @@ Rails3BaseApi::Application.routes.draw do
     post 'users/sign_in', to: 'sessions#create'
   end
 
-  # Resources require authenticated user
-  #
-  namespace :user do
-    resources :comments, only: [:index, :create]
+  if defined? ApiTaster::Engine
+    mount ApiTaster::Engine => '/api_taster'
+    root to: ApiTaster::Engine
   end
-
-  # Public resources
-  #
-  resources :posts, only: [:index, :show]
-
-  root :to => 'posts#index'
-
-  mount ApiTaster::Engine => '/api_taster' if defined? ApiTaster::Engine
 end
