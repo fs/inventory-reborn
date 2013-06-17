@@ -7,7 +7,7 @@ Rails3BaseApi::Application.routes.draw do
   end
 
   if defined? ApiTaster::Engine
-    mount ApiTaster::Engine => '/api_taster' if defined? ApiTaster::Engine
+    mount ApiTaster::Engine => '/api_taster'
     root to: ApiTaster::Engine
   end
 end
