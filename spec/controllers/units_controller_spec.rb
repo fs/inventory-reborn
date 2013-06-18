@@ -30,7 +30,7 @@ describe UnitsController do
       expect(controller.units).to eq units
     end
 
-    it "assigns user units" do
+    it "assigns room units" do
       controller.room.stub(:units) { units }
       get 'index', format: 'json'
 
