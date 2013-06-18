@@ -1,4 +1,6 @@
 class UnitsController < ApplicationController
+  before_filter :authenticate_user!
+
   expose(:user)
   expose(:room)
   expose(:units) { user.units.presence || room.units.presence || Unit.includes(:user, :room) }
