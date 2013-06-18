@@ -9,15 +9,10 @@ class Unit < ActiveRecord::Base
   validates :out_of_order_note, presence: true, if: proc { |u| u.out_of_order? }
 
   before_validation :generate_next_inv_id, if: proc { |u| u.inv_id.blank? }
-  before_save :reassign_user, if: proc { |u| u.on_depot? }
 
   private
 
   def generate_next_inv_id
     self.inv_id = self.class.maximum(:inv_id).to_i + 1
-  end
-
-  def reassign_user
-    self.user = User.admins.first
   end
 end

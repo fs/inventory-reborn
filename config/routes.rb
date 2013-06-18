@@ -1,4 +1,4 @@
-Rails3BaseApi::Application.routes.draw do
+InventoryReborn::Application.routes.draw do
   # Devise
   #
   devise_for :users, only: []
@@ -17,7 +17,7 @@ Rails3BaseApi::Application.routes.draw do
   resources :units, only: :index
 
   if defined? ApiTaster::Engine
-    mount ApiTaster::Engine => '/api_taster' if defined? ApiTaster::Engine
+    mount ApiTaster::Engine => '/api_taster'
     root to: ApiTaster::Engine
   end
 end
