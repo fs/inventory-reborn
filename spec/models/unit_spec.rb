@@ -49,31 +49,6 @@ describe Unit do
         expect { unit.valid? }.to change { unit.inv_id }.by(0)
       end
     end
-
-    context 'before save' do
-      let(:admin) { FactoryGirl.build(:user, :admin) }
-
-      context 'on depot' do
-        before do
-          User.stub(:admins).and_return([admin])
-          unit.on_depot = true
-        end
-
-        it 'receive reassign_user' do
-          unit.should_receive(:reassign_user)
-          unit.save!
-        end
-
-        it 'reassing user if on depot' do
-          expect { unit.save! }.to change { unit.user }.to(admin)
-        end
-      end
-
-      it 'not receive reassign_user' do
-        unit.should_not_receive(:reassign_user)
-        unit.save!
-      end
-    end
   end
 
   describe 'scopes' do
