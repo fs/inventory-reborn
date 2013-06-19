@@ -4,7 +4,7 @@ ApiTaster.routes do
   markdown
 
   post '/users/sign_in', user: {
-    :email => Examples.user.email,
-    :password => Examples.password
+    email: Examples.user.email,
+    password: Examples.password
   }
 end if defined? ApiTaster
