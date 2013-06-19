@@ -22,6 +22,7 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent', require: false
   gem 'zeus'
+  gem 'rails-erd'
 end
 
 group :development, :test do
