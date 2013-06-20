@@ -2,7 +2,7 @@ module Examples
   extend self
 
   def user
-    User.first
+    @user ||= User.first
   end
 
   def password
@@ -10,7 +10,7 @@ module Examples
   end
 
   def room
-    Room.first
+    @room ||= Room.first
   end
 
   def setup!
