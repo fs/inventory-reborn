@@ -16,7 +16,6 @@ module Examples
   def setup!
     ActiveRecord::Base.transaction do
       FactoryGirl.create :user
-      FactoryGirl.create :user, :admin
 
       FactoryGirl.create :room
 
