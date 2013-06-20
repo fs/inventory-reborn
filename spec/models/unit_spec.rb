@@ -14,6 +14,7 @@ describe Unit do
       it { should validate_presence_of :unit_type }
       it { should validate_presence_of :room }
       it { should validate_presence_of :user }
+      it { should validate_presence_of :inv_id }
 
       context 'out_of_order_note' do
         it 'skip validation with out_of_order is not true' do
@@ -35,25 +36,6 @@ describe Unit do
 
     context 'numericality' do
       it { should validate_numericality_of :inv_id }
-    end
-  end
-
-  describe 'callbacks' do
-    context 'before validation' do
-      it 'generate next inv_id' do
-        unit.inv_id = nil
-        expect { unit.valid? }.to change { unit.inv_id }.from(nil).to(1)
-      end
-
-      it 'callback not call' do
-        expect { unit.valid? }.to change { unit.inv_id }.by(0)
-      end
-    end
-  end
-
-  describe 'scopes' do
-    it 'scoped by default scope' do
-      Unit.scoped.to_sql.should == Unit.order('inv_id').to_sql
     end
   end
 end
