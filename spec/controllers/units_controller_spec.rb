@@ -15,23 +15,8 @@ describe UnitsController do
       expect(response.code).to eq '200'
     end
 
-    it "assigns all units" do
-      Unit.stub(:scoped) { units }
-      units.stub(:includes) { units }
-      get 'index', format: 'json'
-
-      expect(controller.units).to eq units
-    end
-
-    it "assigns user units" do
-      controller.user.stub(:units) { units }
-      get 'index', format: 'json'
-
-      expect(controller.units).to eq units
-    end
-
-    it "assigns room units" do
-      controller.room.stub(:units) { units }
+    it "assigns units" do
+      controller.unit_fetcher.stub(:units) { units }
       get 'index', format: 'json'
 
       expect(controller.units).to eq units
