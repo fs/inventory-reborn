@@ -8,9 +8,13 @@ class UnitFetcher
   end
 
   def ancestors
-    ancestors = [:user, :room]
-    {user: user, room: room}.each { |k, v| ancestors.delete(k) if v.persisted? }
-    ancestors
+    if user.persisted?
+      [:room]
+    elsif room.persisted?
+      [:user]
+    else
+      [:user, :room]
+    end
   end
 
   private
