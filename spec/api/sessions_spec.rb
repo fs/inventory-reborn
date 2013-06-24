@@ -12,7 +12,7 @@ describe '/users/sign_in' do
       end
 
       subject { json_response_body }
-      it { should be_a_user_representation(user) }
+      it { should be_a_full_user_representation(user) }
     end
 
     context 'with invalid credentials' do

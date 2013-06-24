@@ -1,0 +1,113 @@
+require 'spec_helper'
+
+describe 'resource units' do
+  describe 'list' do
+    let!(:user) { FactoryGirl.create :user }
+    let!(:room) { FactoryGirl.create :room }
+    let!(:units) { FactoryGirl.create_list :unit, 2 }
+    let!(:user_units) { FactoryGirl.create_list :unit, 2, user: user }
+    let!(:room_units) { FactoryGirl.create_list :unit, 2, room: room }
+
+    context 'GET /units.json' do
+      context 'without authentication token' do
+        before do
+          get '/units.json'
+        end
+
+        it 'responds unauthorized with an HTTP 401 status code' do
+          expect(response.code).to eq('401')
+        end
+      end
+
+      context 'with authentication token' do
+        before do
+          get '/units.json',
+            authentication_token: user.authentication_token
+        end
+
+        subject { json_response_body }
+        it { should be_a_kind_of Array }
+        its(:first) { should be_a_unit_representation(units.first) }
+        its(:count) { should eq(6) }
+
+        context 'without user' do
+          subject { json_response_body.first['user'] }
+          it { should be_a_user_representation(units.first.user) }
+        end
+
+        context 'without room' do
+          subject { json_response_body.first['room'] }
+          it { should be_a_room_representation(units.first.room) }
+        end
+      end
+    end
+
+    context 'GET /users/:id/units.json' do
+      context 'without authentication token' do
+        before do
+          get "/users/#{user.id}/units.json"
+        end
+
+        it 'responds unauthorized with an HTTP 401 status code' do
+          expect(response.code).to eq('401')
+        end
+      end
+
+      context 'with authentication token' do
+        before do
+          get "/users/#{user.id}/units.json",
+            authentication_token: user.authentication_token
+        end
+
+        subject { json_response_body }
+        it { should be_a_kind_of Array }
+        its(:first) { should be_a_unit_representation(user_units.first) }
+        its(:count) { should eq(2) }
+
+        context 'without user' do
+          subject { json_response_body.first['user'] }
+          it { should be_nil }
+        end
+
+        context 'without room' do
+          subject { json_response_body.first['room'] }
+          it { should be_a_room_representation(user_units.first.room) }
+        end
+      end
+    end
+
+    context 'GET /rooms/:id/units.json' do
+      context 'without authentication token' do
+        before do
+          get "/rooms/#{room.id}/units.json"
+        end
+
+        it 'responds unauthorized with an HTTP 401 status code' do
+          expect(response.code).to eq('401')
+        end
+      end
+
+      context 'with authentication token' do
+        before do
+          get "/rooms/#{room.id}/units.json",
+            authentication_token: user.authentication_token
+        end
+
+        subject { json_response_body }
+        it { should be_a_kind_of Array }
+        its(:first) { should be_a_unit_representation(room_units.first) }
+        its(:count) { should eq(2) }
+
+        context 'without user' do
+          subject { json_response_body.first['user'] }
+          it { should be_a_user_representation(room_units.first.user) }
+        end
+
+        context 'without room' do
+          subject { json_response_body.first['room'] }
+          it { should be_nil }
+        end
+      end
+    end
+  end
+end
