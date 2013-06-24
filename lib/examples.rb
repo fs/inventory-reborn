@@ -13,6 +13,10 @@ module Examples
     @room ||= Room.first
   end
 
+  def unit
+    @unit ||= Unit.first
+  end
+
   def setup!
     ActiveRecord::Base.transaction do
       FactoryGirl.create :user

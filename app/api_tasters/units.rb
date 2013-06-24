@@ -23,4 +23,12 @@ ApiTaster.routes do
   get '/rooms/:room_id/units',
     room_id: Examples.room.id,
     authentication_token: Examples.user.authentication_token
+
+  desc <<-markdown.strip_heredoc
+    ## Single unit
+  markdown
+
+  get '/units/:id',
+    id: Examples.unit.id,
+    authentication_token: Examples.user.authentication_token
 end if defined? ApiTaster
