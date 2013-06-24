@@ -5,17 +5,17 @@ describe UnitsController do
     sign_in(FactoryGirl.create(:user))
   end
 
-  describe "GET 'index'" do
+  describe 'GET #index' do
     let(:units) { FactoryGirl.build_list :unit, 2 }
 
-    it "returns http success" do
+    it 'returns http success' do
       get 'index', format: 'json'
 
       expect(response).to be_success
       expect(response.code).to eq '200'
     end
 
-    it "assigns units" do
+    it 'assigns units' do
       controller.unit_fetcher.stub(:units) { units }
       get 'index', format: 'json'
 
@@ -23,7 +23,7 @@ describe UnitsController do
     end
   end
 
-  describe "GET 'show'" do
+  describe 'GET #show' do
     let(:unit) { FactoryGirl.build :unit, id: 1 }
     let(:units) { [unit] }
 
@@ -33,7 +33,7 @@ describe UnitsController do
       units.stub(:find) { unit }
     end
 
-    it "returns http success" do
+    it 'returns http success' do
       get 'show',
         id: unit.id,
         format: 'json'
@@ -42,7 +42,7 @@ describe UnitsController do
       expect(response.code).to eq '200'
     end
 
-    it "assigns unit" do
+    it 'assigns unit' do
       get 'show',
         id: unit.id,
         format: 'json'
