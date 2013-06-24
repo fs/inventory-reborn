@@ -3,11 +3,19 @@ class UnitsController < ApplicationController
 
   expose(:unit_fetcher) { UnitFetcher.new(params) }
   expose(:units) { unit_fetcher.units }
+  expose(:unit)
 
   def index
     respond_with units,
       serializer_includes: {
         unit: unit_fetcher.ancestors
+      }
+  end
+
+  def show
+    respond_with unit,
+      serializer_includes: {
+        unit: [:user, :room]
       }
   end
 end
