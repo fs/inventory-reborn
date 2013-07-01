@@ -50,4 +50,28 @@ describe UnitsController do
       expect(controller.unit).to eq unit
     end
   end
+
+  describe 'POST #create' do
+    let(:room) { FactoryGirl.build :room }
+
+    before do
+      Room.stub(:find) { room }
+      room.stub(:persisted?) { true }
+
+      post 'create',
+        unit: {
+          unit_type: 'Monitor',
+          inv_id: 105,
+          name: 'Acer X243HQ',
+          description: '',
+          room_id: 1
+        },
+        format: 'json'
+    end
+
+    it 'returns http success' do
+      expect(response).to be_success
+      expect(response.code).to eq '201'
+    end
+  end
 end
