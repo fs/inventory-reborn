@@ -3,7 +3,7 @@ class UnitsController < ApplicationController
 
   expose(:unit_fetcher) { UnitFetcher.perform(params) }
   expose(:units) { unit_fetcher.units }
-  expose(:unit, attributes: :unit_params)
+  expose(:unit)
 
   def index
     respond_with units,
