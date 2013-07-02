@@ -53,9 +53,11 @@ describe UnitsController do
 
   describe 'POST #create' do
     let(:room) { FactoryGirl.build :room }
+    let(:user) { FactoryGirl.build :user }
 
     before do
       Room.stub(:find) { room }
+      User.stub(:find) { user }
       room.stub(:persisted?) { true }
 
       post 'create',
@@ -64,7 +66,8 @@ describe UnitsController do
           inv_id: 105,
           name: 'Acer X243HQ',
           description: '',
-          room_id: 1
+          room_id: 1,
+          user_id: 1
         },
         format: 'json'
     end
