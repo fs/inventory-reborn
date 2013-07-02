@@ -168,7 +168,8 @@ describe 'resource units' do
             inv_id: 105,
             name: 'Acer X243HQ',
             description: '',
-            room_id: room.id
+            room_id: room.id,
+            user_id: user.id
           }
       end
 

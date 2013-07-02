@@ -10,6 +10,7 @@ describe UnitSaver do
     unit.stub(:save!) { true }
     unit_saver.stub(:unit_params) { Hash.new }
     unit_saver.stub(:room) { room }
+    unit_saver.stub(:user) { user }
   end
 
   describe '#create!' do
