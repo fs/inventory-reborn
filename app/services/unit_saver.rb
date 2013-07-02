@@ -1,13 +1,12 @@
 class UnitSaver
-  def initialize(unit, user, params = {})
+  def initialize(unit, params = {})
     @unit = unit
-    @user = user
     @params = params
   end
 
   def create!
     @unit.assign_attributes(unit_params)
-    @unit.user = @user
+    @unit.user = user
     @unit.room = room
 
     @unit.save!
@@ -19,8 +18,12 @@ class UnitSaver
     @room ||= Room.find(@params[:room_id])
   end
 
+  def user
+    @user ||= User.find(@params[:user_id])
+  end
+
   def unit_params
-    @unit_params ||= @params.except(:room_id).permit(:unit_type, :inv_id, :name,
+    @unit_params ||= @params.except(:room_id, :user_id).permit(:unit_type, :inv_id, :name,
       :description, :on_depot, :out_of_order, :out_of_order_note)
   end
 end
