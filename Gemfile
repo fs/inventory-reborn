@@ -44,7 +44,7 @@ group :test do
 end
 
 group :development, :staging do
-  gem 'api_taster', git: 'git://github.com/fredwu/api_taster.git'
+  gem 'api_taster', github: 'fredwu/api_taster'
 end
 
 group :development, :test, :staging do
