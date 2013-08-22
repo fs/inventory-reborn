@@ -22,7 +22,6 @@ Application currently based on Rails 3.2 stable branch and Ruby 1.9
 ### Application gems:
 
 * [Decent Exposure](https://github.com/voxdolo/decent_exposure) for DRY controllers
-* [Airbrake](https://github.com/airbrake/airbrake) for exception notification
 * [Thin](https://github.com/macournoyer/thin) as rails web server
 
 ### Development gems
