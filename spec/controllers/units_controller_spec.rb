@@ -108,7 +108,7 @@ describe UnitsController do
 
      it 'returns http success' do
        expect(response).to be_success
-       expect(response.code).to eq '201'
+       expect(response.code).to eq '200'
      end
 
      it 'assign attributes to unit' do
