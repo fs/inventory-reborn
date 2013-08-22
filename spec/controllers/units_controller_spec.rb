@@ -70,6 +70,7 @@ describe UnitsController do
           user_id: 1
         },
         format: 'json'
+
     end
 
     it 'returns http success' do
@@ -77,4 +78,32 @@ describe UnitsController do
       expect(response.code).to eq '201'
     end
   end
+
+  describe 'PUT #update' do
+    before do
+      Room.stub(:find) { room }
+      User.stub(:find) { user }
+      Unit.stub(:find) { unit }
+      room.stub(:persisted?) { true }
+
+    end
+
+    it 'allows unit to be updated' do
+      put 'update',
+      unit: {
+        unit_type: 'Monitor',
+        inv_id: 105,
+        name: 'Asus',
+        description: '',
+        room_id: 1,
+        user_id: 1
+      },
+      format: 'json'
+      response.shoul be_successful
+    end
+    # it 'returns http success' do
+    #   expect(response).to be_success
+    #   expect(response.code).to eq '201'
+    # end
+  end      
 end
