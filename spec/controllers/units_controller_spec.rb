@@ -80,30 +80,41 @@ describe UnitsController do
   end
 
   describe 'PUT #update' do
+    let(:room) { FactoryGirl.build :room }
+    let(:user) { FactoryGirl.build :user }
+    let(:unit) { FactoryGirl.build :unit, id: 1 }
+    let(:unit_attributes) do
+      {
+        unit_type: 'Monitor',
+        inv_id: 105,
+        name: 'Asus',
+        description: ''
+      }
+    end
+
     before do
       Room.stub(:find) { room }
       User.stub(:find) { user }
       Unit.stub(:find) { unit }
-      room.stub(:persisted?) { true }
+      unit.stub(:save!) { true }
+      controller.stub(:unit) { unit }
+      unit.stub(:persisted?) { true }
 
-    end
-
-    it 'allows unit to be updated' do
       put 'update',
-      unit: {
-        unit_type: 'Monitor',
-        inv_id: 105,
-        name: 'Asus',
-        description: '',
-        room_id: 1,
-        user_id: 1
-      },
-      format: 'json'
-      response.shoul be_successful
+        id: unit.id,
+        unit: unit_attributes,
+        format: 'json'
     end
-    # it 'returns http success' do
-    #   expect(response).to be_success
-    #   expect(response.code).to eq '201'
-    # end
+
+     it 'returns http success' do
+       expect(response).to be_success
+       expect(response.code).to eq '201'
+     end
+
+     it 'assign attributes to unit' do
+       unit.assign_attributes(unit_attributes)
+
+       expect(controller.unit).to eq unit
+     end
   end      
 end

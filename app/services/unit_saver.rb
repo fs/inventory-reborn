@@ -5,14 +5,22 @@ class UnitSaver
   end
 
   def create!
+    save!
+  end
+
+  def update!
+    save!
+  end
+
+  private
+
+  def save!
     @unit.assign_attributes(unit_params)
     @unit.user = user
     @unit.room = room
 
     @unit.save!
   end
-
-  private
 
   def room
     @room ||= Room.find(@params[:room_id])

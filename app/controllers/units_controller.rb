@@ -25,4 +25,10 @@ class UnitsController < ApplicationController
 
     respond_with unit
   end
+
+  def update
+    unit_saver.update!
+
+    respond_with unit
+  end
 end
