@@ -6,6 +6,8 @@ class ApiResponder < ActionController::Responder
       display resource
     elsif post?
       display resource, status: :created, location: nil
+    elsif put?
+      display resource, status: :ok
     else
       head :no_content
     end

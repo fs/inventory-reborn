@@ -180,6 +180,16 @@ describe 'resource units' do
 
   describe 'PUT /units/:id' do
     let!(:unit) { FactoryGirl.create :unit, user: user, room: room }
+    let(:unit_attributes) do
+      {
+        unit_type: 'Monitor',
+        inv_id: 105,
+        name: 'Acer X243HQ',
+        description: '',
+        room_id: room.id,
+        user_id: user.id
+      }
+    end
 
     context 'without authentication token' do
       before do
@@ -195,14 +205,9 @@ describe 'resource units' do
       before do
         put "/units/#{unit.id}.json",
           authentication_token: user.authentication_token,
-          unit: {
-            unit_type: 'Monitor',
-            inv_id: 105,
-            name: 'Acer X243HQ',
-            description: '',
-            room_id: room.id,
-            user_id: user.id
-          }
+          unit: unit_attributes
+
+        unit.assign_attributes(unit_attributes)
       end
 
       subject { json_response_body }
