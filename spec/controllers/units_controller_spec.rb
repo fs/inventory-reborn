@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe UnitsController do
+  
+
   before do
     sign_in(FactoryGirl.create(:user))
   end
@@ -51,70 +53,61 @@ describe UnitsController do
     end
   end
 
-  describe 'POST #create' do
+  context 'update and create'do
     let(:room) { FactoryGirl.build :room }
     let(:user) { FactoryGirl.build :user }
-
-    before do
-      Room.stub(:find) { room }
-      User.stub(:find) { user }
-      room.stub(:persisted?) { true }
-
-      post 'create',
-        unit: {
-          unit_type: 'Monitor',
-          inv_id: 105,
-          name: 'Acer X243HQ',
-          description: '',
-          room_id: 1,
-          user_id: 1
-        },
-        format: 'json'
-
-    end
-
-    it 'returns http success' do
-      expect(response).to be_success
-      expect(response.code).to eq '201'
-    end
-  end
-
-  describe 'PUT #update' do
-    let(:room) { FactoryGirl.build :room }
-    let(:user) { FactoryGirl.build :user }
-    let(:unit) { FactoryGirl.build :unit, id: 1 }
     let(:unit_attributes) do
       {
         unit_type: 'Monitor',
         inv_id: 105,
-        name: 'Asus',
-        description: ''
+        name: 'Acer X243HQ',
+        description: '',
+        room_id: 1,
+        user_id: 1
       }
     end
-
     before do
       Room.stub(:find) { room }
       User.stub(:find) { user }
-      Unit.stub(:find) { unit }
-      unit.stub(:save!) { true }
-      controller.stub(:unit) { unit }
-      unit.stub(:persisted?) { true }
+      room.stub(:persisted?) { true }
+    end  
 
-      put 'update',
-        id: unit.id,
-        unit: unit_attributes,
-        format: 'json'
+    describe 'POST #create' do
+      before do
+        post 'create',
+          unit: unit_attributes,
+          format: 'json'
+      end
+
+      it 'returns http success' do
+        expect(response).to be_success
+        expect(response.code).to eq '201'
+      end
     end
 
-     it 'returns http success' do
-       expect(response).to be_success
-       expect(response.code).to eq '200'
-     end
+    describe 'PUT #update' do      
+      let(:unit) { FactoryGirl.build :unit, id: 1 }
 
-     it 'assign attributes to unit' do
-       unit.assign_attributes(unit_attributes)
+      before do
+        Unit.stub(:find) { unit }
+        unit.stub(:save!) { true }
+        controller.stub(:unit) { unit }
 
-       expect(controller.unit).to eq unit
-     end
-  end      
+        put 'update',
+          id: unit.id,
+          unit: unit_attributes,
+          format: 'json'
+      end
+
+      it 'returns http success' do
+        expect(response).to be_success
+        expect(response.code).to eq '200'
+      end
+
+      it 'assign attributes to unit' do
+        unit.assign_attributes(unit_attributes)
+        expect(controller.unit).to eq unit
+      end
+    end      
+  end  
 end
