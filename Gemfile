@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+ruby '2.0.0'
+
+gem 'rails', '3.2.13'
 
 gem 'rails-api'
 
@@ -9,10 +11,11 @@ gem 'airbrake'
 gem 'thin'
 gem 'decent_exposure'
 gem 'active_model_serializers'
-gem 'seedbank'
+gem 'seedbank', github: 'james2m/seedbank'
 gem 'dotenv'
 gem 'strong_parameters'
 gem 'devise'
+gem 'interactor-rails'
 
 group :development do
   gem 'letter_opener'

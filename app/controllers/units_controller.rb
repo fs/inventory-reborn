@@ -18,4 +18,10 @@ class UnitsController < ApplicationController
         unit: [:user, :room]
       }
   end
+
+  def create
+    UnitSaver.perform(unit: unit, unit_params: params[:unit])
+
+    respond_with unit
+  end
 end
