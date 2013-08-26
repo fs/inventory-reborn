@@ -6,7 +6,7 @@ InventoryReborn::Application.routes.draw do
     post 'users/sign_in', to: 'sessions#create'
   end
 
-  resources :users, only: [] do
+  resources :users, only: :index do
     resources :units, only: :index
   end
 
@@ -14,7 +14,7 @@ InventoryReborn::Application.routes.draw do
     resources :units, only: :index
   end
 
-  resources :units, only: [:index, :show]
+  resources :units, only: [:index, :show, :create, :update]
 
   if defined? ApiTaster::Engine
     mount ApiTaster::Engine => '/api_taster'

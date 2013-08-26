@@ -31,4 +31,25 @@ ApiTaster.routes do
   get '/units/:id',
     id: Examples.unit.id,
     authentication_token: Examples.user.authentication_token
+
+  desc <<-markdown.strip_heredoc
+    ## Create unit
+  markdown
+
+  post '/units',
+    {
+      unit: FactoryGirl.attributes_for(:unit).
+        merge({ room_id: Examples.room.id, user_id: Examples.user.id })
+    }.merge({ authentication_token: Examples.user.authentication_token })
+
+  desc <<-markdown.strip_heredoc
+    ## Update unit
+  markdown
+
+  put '/units/:id',
+    {
+      id: Examples.unit.id,
+      unit: FactoryGirl.attributes_for(:unit).
+        merge({ room_id: Examples.room.id, user_id: Examples.user.id })
+    }.merge({ authentication_token: Examples.user.authentication_token })
 end if defined? ApiTaster
