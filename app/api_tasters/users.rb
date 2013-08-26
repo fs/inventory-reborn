@@ -4,6 +4,6 @@ ApiTaster.routes do
   markdown
 
   get '/users',
-   authentication_token: Examples.user.authentication_token
+    authentication_token: Examples.user.authentication_token
   
-end
+end if defined? ApiTaster
