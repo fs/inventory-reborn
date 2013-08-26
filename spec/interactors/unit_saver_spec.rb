@@ -4,29 +4,30 @@ describe UnitSaver do
   let(:user) { FactoryGirl.build :user }
   let(:unit) { FactoryGirl.build :unit }
   let(:room) { FactoryGirl.build :room }
-  let(:unit_saver) { UnitSaver.new(unit, user) }
+  let(:unit_params) { FactoryGirl.attributes_for :unit }
 
   before do
     unit.stub(:save!) { true }
-    unit_saver.stub(:unit_params) { Hash.new }
-    unit_saver.stub(:room) { room }
-    unit_saver.stub(:user) { user }
+    Room.stub(:find) { room }
+    User.stub(:find) { user }
+    unit_params.stub(:except) { unit_params }
+    unit_params.stub(:permit) { unit_params }
   end
 
-  describe '#create!' do
+  describe '#perform' do
     it 'receive assing_attributes' do
       unit.should_receive(:assign_attributes) { unit }
-      unit_saver.create!
+      UnitSaver.perform(unit: unit, unit_params: unit_params)
     end
 
     it 'receive save' do
       unit.should_receive(:save!) { true }
-      unit_saver.create!
+      UnitSaver.perform(unit: unit, unit_params: unit_params)
     end
 
     context 'assign user and room to unit' do
       before do
-        unit_saver.create!
+        UnitSaver.perform(unit: unit, unit_params: unit_params)
       end
 
       it 'assign user to unit' do
