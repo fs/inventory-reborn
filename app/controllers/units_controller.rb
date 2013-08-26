@@ -2,7 +2,6 @@ class UnitsController < ApplicationController
   before_filter :authenticate_user!
 
   expose(:unit_fetcher) { UnitFetcher.new(params) }
-  expose(:unit_saver) { UnitSaver.new(unit, params[:unit]) }
   expose(:units) { unit_fetcher.units }
   expose(:unit)
 
@@ -21,7 +20,7 @@ class UnitsController < ApplicationController
   end
 
   def create
-    unit_saver.create!
+    UnitSaver.perform(unit: unit, unit_params: params[:unit])
 
     respond_with unit
   end
