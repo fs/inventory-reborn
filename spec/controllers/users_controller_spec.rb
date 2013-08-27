@@ -7,7 +7,10 @@ describe UsersController do
 
   describe "users index" do
     let(:users) { FactoryGirl.build_list :user, 2 }
-    get 'index', format: 'json'
+
+    before do
+      get 'index', format: 'json'
+    end
 
     it 'returns http success' do
       expect(response).to be_success
