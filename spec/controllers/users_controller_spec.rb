@@ -16,7 +16,8 @@ describe UsersController do
     end
 
     it 'assigns users' do
-      controller.stub(:users) { users }
+      User.stub(:scoped) { users }
+      users.stub(:where) { users }
       get 'index', format: 'json'
 
       expect(controller.users).to eq users

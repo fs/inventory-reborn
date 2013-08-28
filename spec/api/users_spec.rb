@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'resource users' do 
-
   describe 'list' do 
     let!(:users) { FactoryGirl.create_list :user, 2 }
     let!(:user) { users.first }
@@ -27,7 +26,6 @@ describe 'resource users' do
         it { should be_a_kind_of Array }
         its(:first) { should be_a_user_representation(user) }
         its(:count) { should eq(2) }
-
       end
     end
   end
