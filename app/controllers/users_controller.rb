@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:users) { User.order('id')}
+  expose(:users)
 
   def index
     respond_with users

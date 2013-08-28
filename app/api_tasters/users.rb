@@ -5,5 +5,4 @@ ApiTaster.routes do
 
   get '/users',
     authentication_token: Examples.user.authentication_token
-  
 end if defined? ApiTaster
