@@ -33,14 +33,12 @@ describe 'resource room' do
   end
 
   describe 'single' do
-    let!(:room) { FactoryGirl.create :room, id: 1}
+    let!(:room) { FactoryGirl.create :room }
 
     context 'GET /rooms/:id.json' do
       context 'without authentication token' do
         before do
-          get '/rooms/',
-            id: room.id,
-            format: 'json'
+          get "/rooms/#{room.id}.json"
         end
 
         it 'responds unauthorized with an HTTP 401 status code' do
@@ -50,10 +48,8 @@ describe 'resource room' do
 
       context 'with authentication token' do
         before do
-          get '/rooms/',
-              id: room.id,
-              authentication_token: user.authentication_token,
-              format: 'json'
+          get "/rooms/#{room.id}.json",
+            authentication_token: user.authentication_token
         end
 
         subject { json_response_body }

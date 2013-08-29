@@ -6,12 +6,11 @@ ApiTaster.routes do
   get '/rooms',
     authentication_token: Examples.user.authentication_token
 
-
   desc <<-markdown.strip_heredoc
     ## List Single room
   markdown
 
-  get '/room/:id',
+  get '/rooms/:id',
     id: Examples.room.id,
     authentication_token: Examples.user.authentication_token
  end if defined? ApiTaster
