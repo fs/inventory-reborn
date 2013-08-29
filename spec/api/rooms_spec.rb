@@ -5,7 +5,6 @@ describe 'resource room' do
 
   describe 'list' do
     let!(:rooms) { FactoryGirl.create_list :room, 2 }
-    
 
     context 'GET rooms.json' do
 
