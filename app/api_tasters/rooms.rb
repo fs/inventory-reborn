@@ -5,5 +5,4 @@ ApiTaster.routes do
 
   get '/rooms',
     authentication_token: Examples.user.authentication_token
-
-end if defined? ApiTaster    
+end if defined? ApiTaster

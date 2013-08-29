@@ -7,20 +7,20 @@ describe RoomsController do
 
   describe 'GET #index' do
     let(:rooms) { FactoryGirl.build_list :room, 2 }
-
-    before do
-      get 'index', format: 'json'
-    end  
-
+ 
     it 'returns http success' do
+      get 'index', format: 'json'
+
       expect(response).to be_success
       expect(response.code).to eq '200'
     end
 
     it 'assigns rooms' do
-      controller.stub(:rooms) { rooms }
+      Room.stub(:scoped) { rooms }
+      rooms.stub(:where) { rooms }
+      get 'index', format: 'json'
+
       expect(controller.rooms).to eq rooms
     end
   end
-
 end

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe 'resource room' do
   let!(:user) { FactoryGirl.create :user }
-  #let!(:room) { FactoryGirl.create :room }
 
   describe 'list' do
     let!(:rooms) { FactoryGirl.create_list :room, 2 }
@@ -30,7 +29,6 @@ describe 'resource room' do
         it { should be_a_kind_of Array }
         its(:first) { should be_a_room_representation(rooms.first) }
         its(:count) { should eq(2) }
-
       end
     end
   end
