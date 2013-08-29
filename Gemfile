@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+ruby '2.0.0'
+
+gem 'rails', '3.2.13'
 
 gem 'rails-api'
 
@@ -9,7 +11,7 @@ gem 'airbrake'
 gem 'thin'
 gem 'decent_exposure'
 gem 'active_model_serializers'
-gem 'seedbank'
+gem 'seedbank', github: 'james2m/seedbank'
 gem 'dotenv'
 gem 'strong_parameters'
 gem 'devise'
@@ -44,7 +46,7 @@ group :test do
 end
 
 group :development, :staging do
-  gem 'api_taster', git: 'git://github.com/fredwu/api_taster.git'
+  gem 'api_taster', github: 'fredwu/api_taster'
 end
 
 group :development, :test, :staging do
