@@ -4,7 +4,7 @@ describe UnitFetcher do
   let(:units) { FactoryGirl.build_list :unit, 2 }
   let(:user) { FactoryGirl.build :user }
   let(:room) { FactoryGirl.build :room }
-  let(:unit_fetcher) { UnitFetcher.new }
+  let(:unit_fetcher) { UnitFetcher.perform }
 
   before do
     unit_fetcher.stub(:user) { user }
@@ -18,6 +18,7 @@ describe UnitFetcher do
       user.should_receive(:units) { units }
       unit_fetcher.units
     end
+
     it 'should not receive units for room' do
       user.stub(:units) { units }
       room.should_not_receive(:units)

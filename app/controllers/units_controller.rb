@@ -1,7 +1,7 @@
 class UnitsController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:unit_fetcher) { UnitFetcher.new(params) }
+  expose(:unit_fetcher) { UnitFetcher.perform(params) }
   expose(:units) { unit_fetcher.units }
   expose(:unit)
 

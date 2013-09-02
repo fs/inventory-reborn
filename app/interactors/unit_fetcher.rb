@@ -1,7 +1,12 @@
 class UnitFetcher
-  def initialize(params = {})
-    @params = params
+  include Interactor
+
+  def perform
+    context[:units] = units
+    context[:ancestors] = ancestors
   end
+
+  private
 
   def units
     user.units.presence || room.units.presence || Unit.includes(:user, :room)
@@ -17,13 +22,11 @@ class UnitFetcher
     end
   end
 
-  private
-
   def user
-    @user ||= @params[:user_id] ? User.find(@params[:user_id]) : User.new
+    @user ||= context[:user_id] ? User.find(@params[:user_id]) : User.new
   end
 
   def room
-    @room ||= @params[:room_id] ? Room.find(@params[:room_id]) : Room.new
+    @room ||= context[:room_id] ? Room.find(@params[:room_id]) : Room.new
   end
 end
