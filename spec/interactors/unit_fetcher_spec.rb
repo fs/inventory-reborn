@@ -7,8 +7,8 @@ describe UnitFetcher do
   let(:unit_fetcher) { UnitFetcher.perform }
 
   before do
-    unit_fetcher.stub(:user) { user }
-    unit_fetcher.stub(:room) { room }
+    UnitFetcher.any_instance.stub(:user) { user }
+    UnitFetcher.any_instance.stub(:room) { room }
     user.stub(:persisted?) { false }
     room.stub(:persisted?) { false }
   end
@@ -16,33 +16,37 @@ describe UnitFetcher do
   describe '#units' do
     it 'should receive units for user' do
       user.should_receive(:units) { units }
-      unit_fetcher.units
+      UnitFetcher.perform
     end
 
     it 'should not receive units for room' do
       user.stub(:units) { units }
+
       room.should_not_receive(:units)
-      unit_fetcher.units
+      UnitFetcher.perform
     end
 
     it 'should receive units for room' do
       user.stub(:units) { [] }
+
       room.should_receive(:units) { units }
-      unit_fetcher.units
+      UnitFetcher.perform
     end
 
     it 'should not receive includes for User' do
       user.stub(:units) { [] }
       room.stub(:units) { units }
+
       User.should_not_receive(:includes)
-      unit_fetcher.units
+      UnitFetcher.perform
     end
 
     it 'should receive includes for User' do
       user.stub(:units) { [] }
       room.stub(:units) { [] }
+
       Unit.should_receive(:includes) { units }
-      unit_fetcher.units
+      UnitFetcher.perform
     end
   end
 
