@@ -6,11 +6,11 @@ InventoryReborn::Application.routes.draw do
     post 'users/sign_in', to: 'sessions#create'
   end
 
-  resources :users, only: [] do
+  resources :users, only: :index do
     resources :units, only: :index
   end
 
-  resources :rooms, only: [] do
+  resources :rooms, only: :index do
     resources :units, only: :index
   end
 
