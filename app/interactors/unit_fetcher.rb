@@ -2,18 +2,18 @@ class UnitFetcher
   include Interactor
 
   def perform
-    context[:units] = get_units
-    context[:ancestors] = get_ancestors
+    get_units
+    get_ancestors
   end
 
   private
 
   def get_units
-    user.units.presence || room.units.presence || Unit.includes(:user, :room)
+    context[:units] = user.units.presence || room.units.presence || Unit.includes(:user, :room)
   end
 
   def get_ancestors
-    if user.persisted?
+    context[:ancestors] = if user.persisted?
       [:room]
     elsif room.persisted?
       [:user]
