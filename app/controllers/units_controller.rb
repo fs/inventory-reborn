@@ -1,7 +1,7 @@
 class UnitsController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:unit_fetcher) { UnitFetcher.new(params) }
+  expose(:unit_fetcher) { UnitFetcher.perform(params) }
   expose(:units) { unit_fetcher.units }
   expose(:unit)
 
@@ -17,5 +17,11 @@ class UnitsController < ApplicationController
       serializer_includes: {
         unit: [:user, :room]
       }
+  end
+
+  def create
+    UnitSaver.perform(unit: unit, unit_params: params[:unit])
+
+    respond_with unit
   end
 end
