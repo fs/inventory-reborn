@@ -1,10 +1,12 @@
 class UnitSaver
-  def initialize(unit, params = {})
-    @unit = unit
-    @params = params
+  include Interactor
+
+  def setup
+    @unit = context[:unit]
+    @params = context[:unit_params]
   end
 
-  def create!
+  def perform
     @unit.assign_attributes(unit_params)
     @unit.user = user
     @unit.room = room
