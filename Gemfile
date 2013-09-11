@@ -7,7 +7,6 @@ gem 'rails', '3.2.13'
 gem 'rails-api'
 
 gem 'pg'
-gem 'airbrake'
 gem 'thin'
 gem 'decent_exposure'
 gem 'active_model_serializers'
@@ -15,6 +14,7 @@ gem 'seedbank', github: 'james2m/seedbank'
 gem 'dotenv'
 gem 'strong_parameters'
 gem 'devise'
+gem 'rollbar'
 gem 'interactor-rails'
 
 group :development do
