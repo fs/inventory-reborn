@@ -15,6 +15,7 @@ gem 'seedbank', github: 'james2m/seedbank'
 gem 'dotenv'
 gem 'strong_parameters'
 gem 'devise'
+gem 'interactor-rails'
 
 group :development do
   gem 'letter_opener'
