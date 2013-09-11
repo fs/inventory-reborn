@@ -15,6 +15,7 @@ gem 'dotenv'
 gem 'strong_parameters'
 gem 'devise'
 gem 'rollbar'
+gem 'interactor-rails'
 
 group :development do
   gem 'letter_opener'

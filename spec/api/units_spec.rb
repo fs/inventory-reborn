@@ -147,4 +147,34 @@ describe 'resource units' do
       end
     end
   end
+
+  describe 'POST /units' do
+    context 'without authentication token' do
+      before do
+        post '/units.json'
+      end
+
+      it 'responds unauthorized with an HTTP 401 status code' do
+        expect(response.code).to eq('401')
+      end
+    end
+
+    context 'with authentication token' do
+      before do
+        post "/units.json",
+          authentication_token: user.authentication_token,
+          unit: {
+            unit_type: 'Monitor',
+            inv_id: 105,
+            name: 'Acer X243HQ',
+            description: '',
+            room_id: room.id,
+            user_id: user.id
+          }
+      end
+
+      subject { json_response_body }
+      it { should be_a_unit_representation(user.units.last) }
+    end
+  end
 end

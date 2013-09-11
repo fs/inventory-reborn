@@ -10,11 +10,11 @@ InventoryReborn::Application.routes.draw do
     resources :units, only: :index
   end
 
-  resources :rooms, only: :index do
+  resources :rooms, only: [:index, :show] do
     resources :units, only: :index
   end
 
-  resources :units, only: [:index, :show]
+  resources :units, only: [:index, :show, :create]
 
   if defined? ApiTaster::Engine
     mount ApiTaster::Engine => '/api_taster'
