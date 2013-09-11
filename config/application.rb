@@ -69,6 +69,10 @@ module InventoryReborn
     # Add the middleware back in to application b/c it requred by Devise and Warden
     config.middleware.use ActionDispatch::Session::CookieStore
 
+    # Add Rack::MethodOverride middleware in order to support DELETE/PUT requests
+    # in api_taster
+    config.middleware.use Rack::MethodOverride
+
     # Parameter keys that are not explicitly permitted will be raised as exception
     config.action_controller.action_on_unpermitted_parameters = :raise
 

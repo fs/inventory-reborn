@@ -1,1 +1,1 @@
-ApiTaster.global_params = { format: :json } if defined? ApiTaster
+ApiTaster.route_path = Rails.root.join('lib', 'api_tasters') if defined? ApiTaster
