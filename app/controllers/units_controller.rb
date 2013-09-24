@@ -24,4 +24,10 @@ class UnitsController < ApplicationController
 
     respond_with unit
   end
+
+  def update
+    UnitSaver.perform(unit: unit, unit_params: params[:unit])
+
+    respond_with unit
+  end
 end
