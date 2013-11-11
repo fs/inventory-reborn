@@ -2,27 +2,20 @@ require 'spec_helper'
 
 describe 'resource users' do 
   describe 'list' do 
-    let!(:users) { FactoryGirl.create_list :user, 2 }
+    let!(:users) { create_list :user, 2 }
     let!(:user) { users.first }
+    let(:params) { { authentication_token: user.authentication_token } }
+    subject { json_response_body }
 
-    context 'GET /users.json' do
-      context 'without authentication token' do
-        before do
-          get '/users.json'
-        end
-
-        it 'responds unauthorized with an HTTP 401 status code' do
-          expect(response.code).to eq('401')
-        end
-      end
+    context 'GET /users' do
+      let(:method) { :get }
+      let(:url) { '/users' }
+     
+      it_behaves_like 'a method that requires an authentication'
 
       context 'with authentication token' do
-        before do
-          get '/users.json',
-            authentication_token: user.authentication_token
-        end
+        before { get url, params }
 
-        subject { json_response_body }
         it { should be_a_kind_of Array }
         its(:first) { should be_a_user_representation(user) }
         its(:count) { should eq(2) }

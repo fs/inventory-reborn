@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe UnitFetcher do
-  let(:units) { FactoryGirl.build_list :unit, 2 }
-  let(:user) { FactoryGirl.build :user }
-  let(:room) { FactoryGirl.build :room }
+  let(:units) { build_list :unit, 2 }
+  let(:user) { build :user }
+  let(:room) { build :room }
   let(:unit_fetcher) { UnitFetcher.perform }
 
   before do

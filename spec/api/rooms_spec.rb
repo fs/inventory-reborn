@@ -1,60 +1,37 @@
 require 'spec_helper'
 
 describe 'resource room' do
-  let!(:user) { FactoryGirl.create :user }
+  let!(:user) { create :user }
+  let(:params) { { authentication_token: user.authentication_token } }
+  subject { json_response_body }
 
   describe 'list' do
-    let!(:rooms) { FactoryGirl.create_list :room, 2 }
+    let!(:rooms) { create_list :room, 2 }
+    let(:method) { :get }
+    let(:url) { '/rooms' }
 
-    context 'GET rooms.json' do
+    it_behaves_like 'a method that requires an authentication'
 
-      context 'without authentication token' do
-        before do
-          get '/rooms.json'
-        end
+    context 'with authentication token' do
+      before { get url, params }
 
-        it 'responds unauthorized with an HTTP 401 status code' do
-          expect(response.code).to eq('401')
-        end
-      end
-
-      context 'with authentication token' do
-        before do
-          get '/rooms.json',
-            authentication_token: user.authentication_token
-        end
-
-        subject { json_response_body }
-        it { should be_a_kind_of Array }
-        its(:first) { should be_a_room_representation(rooms.first) }
-        its(:count) { should eq(2) }
-      end
+      it { should be_a_kind_of Array }
+      its(:first) { should be_a_room_representation(rooms.first) }
+      its(:count) { should eq(2) }
     end
   end
 
   describe 'single' do
-    let!(:room) { FactoryGirl.create :room }
+    let!(:room) { create :room }
+    let(:method) { :get }
+    let(:url) { "/rooms/#{room.id}" }
 
-    context 'GET /rooms/:id.json' do
-      context 'without authentication token' do
-        before do
-          get "/rooms/#{room.id}.json"
-        end
+    it_behaves_like 'a method that requires an authentication'
 
-        it 'responds unauthorized with an HTTP 401 status code' do
-          expect(response.code).to eq('401')
-        end
-      end
+    context 'with authentication token' do
+      before { get url, params }
 
-      context 'with authentication token' do
-        before do
-          get "/rooms/#{room.id}.json",
-            authentication_token: user.authentication_token
-        end
-
-        subject { json_response_body }
-        it { should be_a_room_representation(room) }
-      end
+      it { should be_a_room_representation(room) }
     end
   end
 end

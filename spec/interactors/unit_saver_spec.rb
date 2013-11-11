@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe UnitSaver do
-  let(:user) { FactoryGirl.build :user }
-  let(:unit) { FactoryGirl.build :unit }
-  let(:room) { FactoryGirl.build :room }
-  let(:unit_params) { FactoryGirl.attributes_for :unit }
+  let(:user) { build :user }
+  let(:unit) { build :unit }
+  let(:room) { build :room }
+  let(:unit_params) { attributes_for :unit }
 
   before do
     unit.stub(:save!) { true }
