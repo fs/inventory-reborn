@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Unit do
-  let(:unit) { FactoryGirl.build :unit }
+  let(:unit) { build :unit }
 
   describe 'associations' do
     it { should belong_to :user }

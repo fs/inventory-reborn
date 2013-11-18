@@ -1,28 +1,29 @@
 require 'spec_helper'
 
 describe '/users/sign_in' do
-  describe 'sign in' do
-    context 'with valid credentials' do
-      let(:user) { FactoryGirl.create :user, password: '123456' }
+  subject { json_response_body }
 
-      before do
-        post '/users/sign_in.json',
+  describe 'sign in' do
+    let(:url) { '/users/sign_in' }
+
+    context 'with valid credentials' do
+      let(:user) { create :user, password: '123456' }
+      let(:params) do
+        {
           email: user.email,
           password: '123456'
+        }
       end
 
-      subject { json_response_body }
+      before { post url, params }
+
       it { should be_a_full_user_representation(user) }
     end
 
     context 'with invalid credentials' do
-      before do
-        post '/users/sign_in.json'
-      end
+      let(:method) { :post }
 
-      it 'responds unauthorized with an HTTP 401 status code' do
-        expect(response.code).to eq('401')
-      end
+      it_behaves_like 'a method that requires an authentication'
     end
   end
 end
