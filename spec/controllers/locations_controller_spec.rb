@@ -11,15 +11,14 @@ describe LocationsController do
   describe 'GET #index' do
     before do
       Location.stub(:scoped) { locations }
-      locations.stub(:where) { locations }
 
       get 'index', format: 'json'
     end
 
     it_behaves_like 'a request with valid params', '200'
 
-    it 'assigns locations' do
-      expect(controller.locations).to eq locations
+    it 'assigns unit_locations' do
+      expect(controller.unit_locations).to eq locations
     end
   end
 
@@ -35,8 +34,8 @@ describe LocationsController do
 
     it_behaves_like 'a request with valid params', '200'
 
-    it 'assigns location' do
-      expect(controller.location).to eq location
+    it 'assigns unit_location' do
+      expect(controller.unit_location).to eq location
     end
   end
 end

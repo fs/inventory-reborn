@@ -1,14 +1,16 @@
 class LocationsController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:locations)
-  expose(:location)
+  # We can't use loaction method b/c
+  # it defined in the ActionController already
+  expose(:unit_locations) { Location.scoped }
+  expose(:unit_location, model: :location)
 
   def index
-    respond_with locations
+    respond_with unit_locations
   end
 
   def show
-    respond_with location
+    respond_with unit_location
   end
 end
