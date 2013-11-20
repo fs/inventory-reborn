@@ -2,19 +2,19 @@ require 'spec_helper'
 
 describe 'resource units' do
   let!(:user) { create :user }
-  let!(:room) { create :room }
+  let!(:location) { create :location }
   let(:params) { { authentication_token: user.authentication_token } }
   let(:params_with_unit_attributes) { params.merge(unit: unit_attributes) }
   let(:unit_attributes) do
     attributes_for(:unit).
-      merge(room_id: room.id, user_id: user.id)
+      merge(location_id: location.id, user_id: user.id)
   end
   subject { json_response_body }
 
   describe 'list' do
     let!(:units) { create_list :unit, 2 }
     let!(:user_units) { create_list :unit, 2, user: user }
-    let!(:room_units) { create_list :unit, 2, room: room }
+    let!(:location_units) { create_list :unit, 2, location: location }
 
     describe 'GET /units' do
       let(:method) { :get }
@@ -34,9 +34,9 @@ describe 'resource units' do
           it { should be_a_user_representation(units.first.user) }
         end
 
-        context 'have room' do
-          subject { json_response_body.first['room'] }
-          it { should be_a_room_representation(units.first.room) }
+        context 'have location' do
+          subject { json_response_body.first['location'] }
+          it { should be_a_location_representation(units.first.location) }
         end
       end
     end
@@ -59,16 +59,16 @@ describe 'resource units' do
           it { should be_nil }
         end
 
-        context 'have room' do
-          subject { json_response_body.first['room'] }
-          it { should be_a_room_representation(user_units.first.room) }
+        context 'have location' do
+          subject { json_response_body.first['location'] }
+          it { should be_a_location_representation(user_units.first.location) }
         end
       end
     end
 
-    describe 'GET /rooms/:id/units' do
+    describe 'GET /locations/:id/units' do
       let(:method) { :get }
-      let(:url) { "/rooms/#{room.id}/units" }
+      let(:url) { "/locations/#{location.id}/units" }
 
       it_behaves_like 'a method that requires an authentication'
 
@@ -76,16 +76,16 @@ describe 'resource units' do
         before { get url, params }
 
         it { should be_a_kind_of Array }
-        its(:first) { should be_a_unit_representation(room_units.first) }
+        its(:first) { should be_a_unit_representation(location_units.first) }
         its(:count) { should eq(2) }
 
         context 'have user' do
           subject { json_response_body.first['user'] }
-          it { should be_a_user_representation(room_units.first.user) }
+          it { should be_a_user_representation(location_units.first.user) }
         end
 
-        context 'without room' do
-          subject { json_response_body.first['room'] }
+        context 'without location' do
+          subject { json_response_body.first['location'] }
           it { should be_nil }
         end
       end
@@ -93,7 +93,7 @@ describe 'resource units' do
   end
 
   describe 'GET /units/:id' do
-    let!(:unit) { create :unit, user: user, room: room }
+    let!(:unit) { create :unit, user: user, location: location }
     let(:method) { :get }
     let(:url) { "/units/#{unit.id}" }
 
@@ -109,9 +109,9 @@ describe 'resource units' do
         it { should be_a_user_representation(user) }
       end
 
-      context 'have room' do
-        subject { json_response_body['room'] }
-        it { should be_a_room_representation(room) }
+      context 'have location' do
+        subject { json_response_body['location'] }
+        it { should be_a_location_representation(location) }
       end
     end
   end
@@ -130,7 +130,7 @@ describe 'resource units' do
   end
 
   describe 'PUT /units/:id' do
-    let!(:unit) { create :unit, user: user, room: room }
+    let!(:unit) { create :unit, user: user, location: location }
     let(:method) { :put }
     let(:url) { "/units/#{unit.id}" }
 

@@ -5,14 +5,14 @@ describe Unit do
 
   describe 'associations' do
     it { should belong_to :user }
-    it { should belong_to :room }
+    it { should belong_to :location }
   end
 
   describe 'validations' do
     context 'presence' do
       it { should validate_presence_of :name }
       it { should validate_presence_of :unit_type }
-      it { should validate_presence_of :room }
+      it { should validate_presence_of :location }
       it { should validate_presence_of :user }
       it { should validate_presence_of :inv_id }
 

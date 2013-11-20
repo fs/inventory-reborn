@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :room do
+  factory :location do
     name { Faker::Name.title }
   end
 end

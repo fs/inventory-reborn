@@ -1,16 +1,16 @@
 ApiTaster.routes do
   desc <<-markdown.strip_heredoc
-    ## List all rooms
+    ## List all locations
   markdown
 
-  get '/rooms',
+  get '/locations',
     authentication_token: Examples.user.authentication_token
 
   desc <<-markdown.strip_heredoc
-    ## List Single room
+    ## List Single location
   markdown
 
-  get '/rooms/:id',
-    id: Examples.room.id,
+  get '/locations/:id',
+    id: Examples.location.id,
     authentication_token: Examples.user.authentication_token
  end if defined? ApiTaster

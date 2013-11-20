@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130614115836) do
 
-  create_table "rooms", :force => true do |t|
+  create_table "locations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20130614115836) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.integer  "room_id"
+    t.integer  "location_id"
     t.boolean  "on_depot",          :default => false
     t.boolean  "out_of_order",      :default => false
     t.text     "out_of_order_note"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130614115836) do
   end
 
   add_index "units", ["inv_id"], :name => "index_units_on_inv_id"
-  add_index "units", ["room_id"], :name => "index_units_on_room_id"
+  add_index "units", ["location_id"], :name => "index_units_on_location_id"
   add_index "units", ["user_id"], :name => "index_units_on_user_id"
 
   create_table "users", :force => true do |t|

@@ -9,7 +9,7 @@ InventoryReborn::Application.routes.draw do
       resources :units, only: :index
     end
 
-    resources :rooms, only: [:index, :show] do
+    resources :locations, only: [:index, :show] do
       resources :units, only: :index
     end
 

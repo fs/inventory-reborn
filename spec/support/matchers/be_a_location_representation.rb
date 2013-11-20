@@ -1,6 +1,6 @@
-RSpec::Matchers.define :be_a_room_representation do |room|
+RSpec::Matchers.define :be_a_location_representation do |location|
   match do |json|
-    response_attributes = room.sliced_attributes %w[
+    response_attributes = location.sliced_attributes %w[
       id
       name
     ]

@@ -3,14 +3,14 @@ require 'spec_helper'
 describe UnitFetcher do
   let(:units) { build_list :unit, 2 }
   let(:user) { build :user }
-  let(:room) { build :room }
+  let(:location) { build :location }
   let(:unit_fetcher) { UnitFetcher.perform }
 
   before do
     UnitFetcher.any_instance.stub(:user) { user }
-    UnitFetcher.any_instance.stub(:room) { room }
+    UnitFetcher.any_instance.stub(:location) { location }
     user.stub(:persisted?) { false }
-    room.stub(:persisted?) { false }
+    location.stub(:persisted?) { false }
   end
 
   describe '#units' do
@@ -19,23 +19,23 @@ describe UnitFetcher do
       UnitFetcher.perform
     end
 
-    it 'should not receive units for room' do
+    it 'should not receive units for location' do
       user.stub(:units) { units }
 
-      room.should_not_receive(:units)
+      location.should_not_receive(:units)
       UnitFetcher.perform
     end
 
-    it 'should receive units for room' do
+    it 'should receive units for location' do
       user.stub(:units) { [] }
 
-      room.should_receive(:units) { units }
+      location.should_receive(:units) { units }
       UnitFetcher.perform
     end
 
     it 'should not receive includes for User' do
       user.stub(:units) { [] }
-      room.stub(:units) { units }
+      location.stub(:units) { units }
 
       User.should_not_receive(:includes)
       UnitFetcher.perform
@@ -43,7 +43,7 @@ describe UnitFetcher do
 
     it 'should receive includes for User' do
       user.stub(:units) { [] }
-      room.stub(:units) { [] }
+      location.stub(:units) { [] }
 
       Unit.should_receive(:includes) { units }
       UnitFetcher.perform
@@ -51,18 +51,18 @@ describe UnitFetcher do
   end
 
   describe '#ancestors' do
-    it 'should return user and room' do
-      unit_fetcher.ancestors.should  eq([:user, :room])
+    it 'should return user and location' do
+      unit_fetcher.ancestors.should  eq([:user, :location])
     end
 
     it 'should return user' do
-      room.stub(:persisted?) { true }
+      location.stub(:persisted?) { true }
       unit_fetcher.ancestors.should  eq([:user])
     end
 
-    it 'should return room' do
+    it 'should return location' do
       user.stub(:persisted?) { true }
-      unit_fetcher.ancestors.should  eq([:room])
+      unit_fetcher.ancestors.should  eq([:location])
     end
   end
 end

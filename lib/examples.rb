@@ -9,8 +9,8 @@ module Examples
     '123456'
   end
 
-  def room
-    @room ||= Room.first
+  def location
+    @location ||= Location.first
   end
 
   def unit
@@ -21,9 +21,9 @@ module Examples
     ActiveRecord::Base.transaction do
       FactoryGirl.create :user
 
-      FactoryGirl.create :room
+      FactoryGirl.create :location
 
-      FactoryGirl.create_list :unit, 3, user: user, room: room
+      FactoryGirl.create_list :unit, 3, user: user, location: location
     end
   end
 end

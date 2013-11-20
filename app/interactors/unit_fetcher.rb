@@ -9,16 +9,16 @@ class UnitFetcher
   private
 
   def get_units
-    context[:units] = user.units.presence || room.units.presence || Unit.includes(:user, :room)
+    context[:units] = user.units.presence || location.units.presence || Unit.includes(:user, :location)
   end
 
   def get_ancestors
     context[:ancestors] = if user.persisted?
-      [:room]
-    elsif room.persisted?
+      [:location]
+    elsif location.persisted?
       [:user]
     else
-      [:user, :room]
+      [:user, :location]
     end
   end
 
@@ -26,7 +26,7 @@ class UnitFetcher
     @user ||= context['user_id'] ? User.find(context['user_id']) : User.new
   end
 
-  def room
-    @room ||= context['room_id'] ? Room.find(context['room_id']) : Room.new
+  def location
+    @location ||= context['location_id'] ? Location.find(context['location_id']) : Location.new
   end
 end

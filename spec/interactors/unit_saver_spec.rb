@@ -3,12 +3,12 @@ require 'spec_helper'
 describe UnitSaver do
   let(:user) { build :user }
   let(:unit) { build :unit }
-  let(:room) { build :room }
+  let(:location) { build :location }
   let(:unit_params) { attributes_for :unit }
 
   before do
     unit.stub(:save!) { true }
-    Room.stub(:find) { room }
+    Location.stub(:find) { location }
     User.stub(:find) { user }
     unit_params.stub(:except) { unit_params }
     unit_params.stub(:permit) { unit_params }
@@ -25,7 +25,7 @@ describe UnitSaver do
       UnitSaver.perform(unit: unit, unit_params: unit_params)
     end
 
-    context 'assign user and room to unit' do
+    context 'assign user and location to unit' do
       before do
         UnitSaver.perform(unit: unit, unit_params: unit_params)
       end
@@ -34,8 +34,8 @@ describe UnitSaver do
         unit.user.should eq user
       end
 
-      it 'assign room to unit' do
-        unit.room.should eq room
+      it 'assign location to unit' do
+        unit.location.should eq location
       end
     end
   end

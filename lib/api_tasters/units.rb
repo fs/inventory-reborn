@@ -17,11 +17,11 @@ ApiTaster.routes do
 
 
   desc <<-markdown.strip_heredoc
-    ## List units for room
+    ## List units for location
   markdown
 
-  get '/rooms/:room_id/units',
-    room_id: Examples.room.id,
+  get '/locations/:location_id/units',
+    location_id: Examples.location.id,
     authentication_token: Examples.user.authentication_token
 
   desc <<-markdown.strip_heredoc
@@ -39,7 +39,7 @@ ApiTaster.routes do
   post '/units',
     {
       unit: FactoryGirl.attributes_for(:unit).
-        merge({ room_id: Examples.room.id, user_id: Examples.user.id })
+        merge({ location_id: Examples.location.id, user_id: Examples.user.id })
     }.merge({ authentication_token: Examples.user.authentication_token })
 
   desc <<-markdown.strip_heredoc
@@ -50,6 +50,6 @@ ApiTaster.routes do
     {
       id: Examples.unit.id,
       unit: FactoryGirl.attributes_for(:unit).
-        merge({ room_id: Examples.room.id, user_id: Examples.user.id })
+        merge({ location_id: Examples.location.id, user_id: Examples.user.id })
     }.merge({ authentication_token: Examples.user.authentication_token })
 end if defined? ApiTaster

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Room do
+describe Location do
   describe 'associations' do
     it { should have_many :units }
   end
