@@ -25,7 +25,9 @@ class UnitSaver
   end
 
   def unit_params
-    @unit_params ||= @params.except(:location_id, :user_id).permit(:unit_type, :inv_id, :name,
-      :description, :on_depot, :out_of_order, :out_of_order_note)
+    @unit_params ||= @params.except(:location_id, :user_id).permit(
+      :unit_type, :inv_id, :name, :product_model_number, :description,
+      :on_depot, :out_of_order, :out_of_order_note
+    )
   end
 end

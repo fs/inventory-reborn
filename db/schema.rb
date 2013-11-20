@@ -23,14 +23,15 @@ ActiveRecord::Schema.define(:version => 20130614115836) do
     t.string   "unit_type"
     t.integer  "inv_id"
     t.string   "name"
+    t.string   "product_model_number"
     t.text     "description"
     t.integer  "user_id"
     t.integer  "location_id"
-    t.boolean  "on_depot",          :default => false
-    t.boolean  "out_of_order",      :default => false
+    t.boolean  "on_depot",             :default => false
+    t.boolean  "out_of_order",         :default => false
     t.text     "out_of_order_note"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   add_index "units", ["inv_id"], :name => "index_units_on_inv_id"

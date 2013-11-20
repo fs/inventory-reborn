@@ -4,6 +4,7 @@ FactoryGirl.define do
     sequence :inv_id
     name { Faker::Name.title }
     description 'Awesome Description'
+    product_model_number { 'V243HQ' }
     on_depot false
     out_of_order true
     out_of_order_note 'Awesome Text'

@@ -4,6 +4,7 @@ class CreateUnits < ActiveRecord::Migration
       t.string :unit_type
       t.integer :inv_id
       t.string :name
+      t.string :product_model_number
       t.text :description
       t.integer :user_id
       t.integer :location_id
