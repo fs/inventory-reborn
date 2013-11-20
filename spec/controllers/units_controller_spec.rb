@@ -3,10 +3,10 @@ require 'spec_helper'
 describe UnitsController do
   let(:units) { build_list :unit, 2 }
   let(:unit) { build :unit, id: 1 }
-  let(:room) { build :room, id: 1 }
+  let(:location) { build :location, id: 1 }
   let(:user) { build :user, id: 1 }
   let(:unit_attributes) do
-    attributes_for(:unit).merge(room_id: room.id, user_id: user.id)
+    attributes_for(:unit).merge(location_id: location.id, user_id: user.id)
   end
 
   before do
@@ -46,9 +46,9 @@ describe UnitsController do
 
   context 'update and create' do
     before do
-      Room.stub(:find) { room }
+      Location.stub(:find) { location }
       User.stub(:find) { user }
-      room.stub(:persisted?) { true }
+      location.stub(:persisted?) { true }
     end
 
     describe 'POST #create' do

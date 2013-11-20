@@ -9,15 +9,15 @@ class UnitSaver
   def perform
     @unit.assign_attributes(unit_params)
     @unit.user = user
-    @unit.room = room
+    @unit.location = location
 
     @unit.save!
   end
 
   private
 
-  def room
-    @room ||= Room.find(@params[:room_id])
+  def location
+    @location ||= Location.find(@params[:location_id])
   end
 
   def user
@@ -25,7 +25,7 @@ class UnitSaver
   end
 
   def unit_params
-    @unit_params ||= @params.except(:room_id, :user_id).permit(:unit_type, :inv_id, :name,
+    @unit_params ||= @params.except(:location_id, :user_id).permit(:unit_type, :inv_id, :name,
       :description, :on_depot, :out_of_order, :out_of_order_note)
   end
 end

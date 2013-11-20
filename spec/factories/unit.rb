@@ -8,6 +8,6 @@ FactoryGirl.define do
     out_of_order true
     out_of_order_note 'Awesome Text'
     user
-    room
+    location
   end
 end

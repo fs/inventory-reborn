@@ -15,7 +15,7 @@ class UnitsController < ApplicationController
   def show
     respond_with unit,
       serializer_includes: {
-        unit: [:user, :room]
+        unit: [:user, :location]
       }
   end
 
