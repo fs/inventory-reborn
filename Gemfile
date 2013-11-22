@@ -26,6 +26,7 @@ group :development do
   gem 'rb-fsevent', require: false
   gem 'zeus'
   gem 'rails-erd'
+  gem 'pry-rails'
 end
 
 group :development, :test do

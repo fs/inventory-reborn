@@ -15,7 +15,7 @@ describe UnitsController do
 
   describe 'GET #index' do
     before do
-      controller.unit_fetcher.stub(:units) { units }
+      controller.service.stub(:units) { units }
       get 'index', format: 'json'
     end
 
