@@ -1,14 +1,14 @@
 class UnitsController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:unit_fetcher) { UnitFetcher.perform(params) }
-  expose(:units) { unit_fetcher.units }
+  expose(:service) { FetchUnits.perform params.slice(:user_id, :location_id).symbolize_keys }
+  expose(:units) { service.units }
   expose(:unit)
 
   def index
     respond_with units,
       serializer_includes: {
-        unit: unit_fetcher.ancestors
+        unit: service.ancestors
       }
   end
 
@@ -20,13 +20,13 @@ class UnitsController < ApplicationController
   end
 
   def create
-    UnitSaver.perform(unit: unit, unit_params: params[:unit])
+    SaveUnit.perform(unit: unit, params: params[:unit])
 
     respond_with unit
   end
 
   def update
-    UnitSaver.perform(unit: unit, unit_params: params[:unit])
+    SaveUnit.perform(unit: unit, params: params[:unit])
 
     respond_with unit
   end
