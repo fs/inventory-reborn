@@ -10,11 +10,11 @@ module Examples
   end
 
   def location
-    @location ||= Location.first
+    @location ||= Location.first_or_create FactoryGirl.attributes_for(:location)
   end
 
   def unit
-    @unit ||= Unit.first
+    @unit ||= Unit.first_or_create FactoryGirl.attributes_for(:unit, user: user, location: location)
   end
 
   def setup!
