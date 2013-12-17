@@ -17,6 +17,18 @@ gem 'devise'
 gem 'rollbar'
 gem 'interactor-rails'
 
+group :assets do
+  gem 'sass-rails'
+  gem 'jquery-rails'
+  gem 'coffee-rails'
+  gem 'compass-rails'
+  gem 'uglifier'
+  gem 'handlebars_assets'
+  gem 'bootstrap-sass'
+  gem 'rails-backbone'
+  gem 'marionette-rails'
+end
+
 group :development do
   gem 'letter_opener'
   gem 'foreman'
