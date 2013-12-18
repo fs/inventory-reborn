@@ -15,17 +15,17 @@ IA.Views.Unauthenticated.Login = Backbone.Marionette.ItemView.extend(
     self = this
     el = $(@el)
     e.preventDefault()
-    el.find("input.btn-primary").button "loading"
+    el.find("button.btn-primary").button "loading"
     el.find(".alert-error").remove()
     @model.save @model.attributes,
       success: (userSession, response) ->
-        el.find("input.btn-primary").button "reset"
+        el.find("button.btn-primary").button "reset"
         IA.currentUser = new IA.Models.User(response)
         IA.vent.trigger "authentication:logged_in"
 
       error: (userSession, response) ->
         result = $.parseJSON(response.responseText)
         el.find("form").prepend IA.Helpers.Notifications.error(result.error)
-        el.find("input.btn-primary").button "reset"
+        el.find("button.btn-primary").button "reset"
 
 )
