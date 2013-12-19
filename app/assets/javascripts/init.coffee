@@ -21,4 +21,5 @@
       App.vent.trigger "authentication:logged_in"
     else
       App.vent.trigger "authentication:logged_out"
+  App
 

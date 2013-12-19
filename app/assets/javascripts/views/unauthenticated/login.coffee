@@ -1,31 +1,31 @@
-IA.Views.Unauthenticated = IA.Views.Unauthenticated or {}
-IA.Views.Unauthenticated.Login = Backbone.Marionette.ItemView.extend(
-  template: "unauthenticated/login"
-  events:
-    "submit form": "login"
+@IA.module "Layouts.Unauthenticated.Login", (Mod, App, Backbone, Marionette, $, _) ->
+  App.Views.Unauthenticated = App.Views.Unauthenticated or {}
 
-  initialize: ->
-    @model = new IA.Models.UserSession()
-    @modelBinder = new Backbone.ModelBinder()
+  class App.Views.Unauthenticated.Login extends Marionette.ItemView
+    template: "unauthenticated/login"
+    events:
+      "submit form": "login"
 
-  onRender: ->
-    @modelBinder.bind @model, @el
+    initialize: ->
+      @model = new App.Models.UserSession
+      @modelBinder = new Backbone.ModelBinder
 
-  login: (e) ->
-    self = this
-    el = $(@el)
-    e.preventDefault()
-    el.find("button.btn-primary").button "loading"
-    el.find(".alert-error").remove()
-    @model.save @model.attributes,
-      success: (userSession, response) ->
-        el.find("button.btn-primary").button "reset"
-        IA.currentUser = new IA.Models.User(response)
-        IA.vent.trigger "authentication:logged_in"
+    onRender: ->
+      @modelBinder.bind @model, @el
 
-      error: (userSession, response) ->
-        result = $.parseJSON(response.responseText)
-        el.find("form").prepend IA.Helpers.Notifications.error(result.error)
-        el.find("button.btn-primary").button "reset"
+    login: (e) ->
+      self = this
+      el = $(@el)
+      e.preventDefault()
+      el.find("button.btn-primary").button "loading"
+      el.find(".alert-error").remove()
+      @model.save @model.attributes,
+        success: (userSession, response) ->
+          el.find("button.btn-primary").button "reset"
+          App.currentUser = new App.Models.User(response)
+          App.vent.trigger "authentication:logged_in"
 
-)
+        error: (userSession, response) ->
+          result = $.parseJSON(response.responseText)
+          el.find("form").prepend App.Helpers.Notifications.error(result.error)
+          el.find("button.btn-primary").button "reset"

@@ -13,8 +13,12 @@
 
   <%= javascript_include_tag "application" %>
   <script type="text/javascript">
-     IA.currentUser = new IA.Models.User(<%= User.first.to_json.html_safe %>);
-     IA.start();
+    <% if signed_in? -%>
+      IA.currentUser = new IA.Models.User(<%= current_user.to_json.html_safe %>);
+    <% else -%>
+      IA.currentUser = null;
+    <% end -%>
+    IA.start();
   </script>
 </body>
 </html>
