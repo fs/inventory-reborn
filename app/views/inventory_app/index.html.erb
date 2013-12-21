@@ -16,7 +16,7 @@
     <% if signed_in? -%>
       IA.currentUser = new IA.Models.User(<%= current_user.to_json.html_safe %>);
     <% else -%>
-      IA.currentUser = null;
+      IA.currentUser = new IA.Models.User(<%= User.first.to_json.html_safe %>);
     <% end -%>
     IA.start();
   </script>
