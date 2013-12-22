@@ -1,15 +1,12 @@
-#= require jquery
-#= require jquery_ujs
-#= require underscore
-#= require backbone.js
-#= require backbone.wreqr.js
-#= require backbone_rails_sync
-#= require Backbone.ModelBinder.js
-#= require backbone.marionette.js
-#= require handlebars
-#= require handlebars.runtime
-#= require bootstrap
-#= require monkeys
-#= require init
-#= require_tree ./templates
-#= require_tree .
+requirejs ["init"], (app) ->
+  "use strict"
+  onDeviceReady = ->
+    document.getElementsByTagName("body")[0].className = ""
+    require ['jquery', "modules/auth"], ->
+      app.start()
+
+   $ ->
+     if window.cordova
+       document.addEventListener "deviceready", onDeviceReady, false
+     else
+       onDeviceReady()

@@ -1,12 +1,14 @@
-@IA.module "Layouts.Unauthenticated", (Mod, App, Backbone, Marionette, $, _) ->
-  Mod.addInitializer ->
-    App.layouts.unauthenticated = new App.Views.Layouts.Unauthenticated
+define [
+  'backbone.marionette',
+  'views/unauthenticated/login'
+], (Marionette, LoginView) ->
 
-  class App.Views.Layouts.Unauthenticated extends Backbone.Marionette.Layout
+  class Unauthenticated extends Marionette.Layout
     template: 'layouts/unauthenticated'
     regions:
       singInContent: '#sing-in-content'
 
     onShow: ->
-      @singInContent.show new App.Views.Unauthenticated.Login
+      @singInContent.show new LoginView
 
+  Unauthenticated

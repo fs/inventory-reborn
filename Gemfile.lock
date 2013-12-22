@@ -107,7 +107,6 @@ GEM
       warden (~> 1.2.1)
     diff-lcs (1.2.4)
     dotenv (0.8.0)
-    ejs (1.0.0)
     email_spec (1.4.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -139,11 +138,6 @@ GEM
       rspec (~> 2.13)
     haml (4.0.3)
       tilt
-    handlebars_assets (0.15)
-      execjs (>= 1.2.9)
-      multi_json
-      sprockets (>= 2.0.3)
-      tilt
     highline (1.6.19)
     hike (1.2.3)
     i18n (0.6.1)
@@ -170,8 +164,6 @@ GEM
       treetop (~> 1.4.8)
     mail_safe (0.3.1)
       actionmailer (>= 1.3.6)
-    marionette-rails (1.4.0)
-      rails (>= 3.1.0)
     method_source (0.8.1)
     mime-types (1.23)
     mini_portile (0.5.0)
@@ -204,10 +196,6 @@ GEM
       actionpack (>= 3.2.11)
       railties (>= 3.2.11)
       tzinfo (~> 0.3.31)
-    rails-backbone (0.7.2)
-      coffee-script (~> 2.2.0)
-      ejs (~> 1.0.0)
-      railties (>= 3.1.0)
     rails-erd (1.1.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
@@ -238,6 +226,8 @@ GEM
       json (~> 1.4)
     redcarpet (3.0.0)
     remotipart (1.2.1)
+    requirejs-rails (0.9.1)
+      railties (>= 3.1.1, < 3.3)
     rollbar (0.10.11)
       multi_json (~> 1.5)
     rspec (2.13.0)
@@ -336,19 +326,16 @@ DEPENDENCIES
   faker
   foreman
   guard-rspec
-  handlebars_assets
   interactor-rails
-  jquery-rails
   letter_opener
   mail_safe
-  marionette-rails
   pg
   rails (= 3.2.13)
   rails-api
-  rails-backbone
   rails-erd
   rails_best_practices
   rb-fsevent
+  requirejs-rails
   rollbar
   rspec-rails
   sass-rails

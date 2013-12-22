@@ -1,0 +1,9 @@
+shim:
+  underscore:
+    exports: '_'
+  backbone:
+    deps: ["underscore", "jquery"]
+    exports: "Backbone"
+  marionette:
+    deps: ['jquery', 'underscore', 'backbone', 'backbone.wreqr', 'backbone.babysitter', 'handlebars', 'marionette.handlebars']
+    exports: "Marionette"
