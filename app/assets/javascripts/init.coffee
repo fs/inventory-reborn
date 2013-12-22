@@ -44,14 +44,24 @@ define [
   Marionette.TemplateCache::compileTemplate = (rawTemplate) ->
     Handlebars.compile rawTemplate
 
+  oldSync = Backbone.sync
+  CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content')
+  Backbone.sync = (method, model, options) ->
+    options.beforeSend = (xhr) ->
+      xhr.setRequestHeader "X-CSRFToken", CSRF_TOKEN
+    oldSync method, model, options
+
 
   App = new Marionette.Application()
-  App.addRegions main: "#main"
+  App.addRegions
+    main: "#main"
+    dialog: "#dialog"
   App.currentUser = null
 
   App.addInitializer ->
     App.main.show new LayoutMain
     App.Auth.start()
+    App.UsersCollection.start()
 
   App.on "initialize:after", (options) ->
       Backbone.history.start()
