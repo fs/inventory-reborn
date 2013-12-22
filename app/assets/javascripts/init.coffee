@@ -48,7 +48,7 @@ define [
   CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content')
   Backbone.sync = (method, model, options) ->
     options.beforeSend = (xhr) ->
-      xhr.setRequestHeader "X-CSRFToken", CSRF_TOKEN
+      xhr.setRequestHeader "X-CSRF-Token", CSRF_TOKEN
     oldSync method, model, options
 
 
@@ -62,6 +62,7 @@ define [
     App.main.show new LayoutMain
     App.Auth.start()
     App.UsersCollection.start()
+    App.UnitsCollection.start()
 
   App.on "initialize:after", (options) ->
       Backbone.history.start()
