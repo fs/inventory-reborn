@@ -17,6 +17,15 @@ gem 'devise'
 gem 'rollbar'
 gem 'interactor-rails'
 
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'compass-rails'
+  gem 'uglifier'
+  gem 'bootstrap-sass'
+  gem 'requirejs-rails'
+end
+
 group :development do
   gem 'letter_opener'
   gem 'foreman'

@@ -1,0 +1,60 @@
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i>
+		<a href="index.html">Home</a>
+		<i class="icon-angle-right"></i>
+	</li>
+	<li>
+    <a href="#units">Units</a>
+		<i class="icon-angle-right"></i>
+  </li>
+  <li>{{id}}</li>
+</ul>
+<div class="box span12">
+  <div class="box-header" data-original-title>
+    <h2><i class="halflings-icon unit"></i><span class="break"></span>Units</h2>
+    <div class="box-icon">
+      <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+      <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+      <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+    </div>
+  </div>
+  <div class="box-content">
+    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+      <tbody>
+        <tr>
+          <td>Unit type</td>
+          <td>{{ unit_type }}</td>
+        </tr>
+        <tr>
+          <td>Inv id</td>
+          <td>{{ inv_id }}</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>{{ name }}</td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>{{ description }}</td>
+        </tr>
+        <tr>
+          <td>On depot</td>
+          <td>{{ on_depot }}</td>
+        </tr>
+        <tr>
+          <td>Out of order</td>
+          <td>{{ out_of_order }}</td>
+        </tr>
+        <tr>
+          <td>User name</td>
+          <td>{{ user.full_name }}</td>
+        </tr>
+        <tr>
+          <td>Locaton name</td>
+          <td>{{ location.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

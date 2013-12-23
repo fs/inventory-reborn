@@ -16,8 +16,9 @@ InventoryReborn::Application.routes.draw do
     resources :units, only: [:index, :show, :create, :update]
   end
 
+  root to: 'inventory_app#index'
+
   if defined? ApiTaster::Engine
     mount ApiTaster::Engine => '/api_taster'
-    root to: ApiTaster::Engine
   end
 end
