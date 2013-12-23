@@ -5,14 +5,16 @@ define [
   'models/unit',
   'views/layouts/main'
   'views/units/units',
-  'views/units/unit_show'
+  'views/units/unit_show',
+  'models/local_storage',
 ], (App,
   Marionette,
   Units,
   Unit
   Main,
   UnitsView,
-  UnitShowView) ->
+  UnitShowView,
+  Storage) ->
 
   App.module "UnitsCollection", (Mod) ->
     class UnitsController extends Marionette.Controller
@@ -27,6 +29,8 @@ define [
             unitsView.collection = unitsCollection
             App.main.currentView.content.show unitsView
 
+          data: authentication_token: Storage.get("API_KEY")
+
       unit: (id) ->
         unitModel = new Unit(id: id)
         unitModel.fetch
@@ -34,13 +38,11 @@ define [
             console.log "error"
 
           success: (unit) ->
-            console.log 'unit'
-            console.log unit
             unitShowView = new UnitShowView
             unitShowView.model = unit
-            console.log 'unitShowView.model'
-            console.log unitShowView.model
             App.main.currentView.content.show unitShowView
+
+          data: authentication_token: Storage.get("API_KEY")
 
     class MainRouter extends Marionette.AppRouter
       appRoutes:

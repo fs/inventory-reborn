@@ -29,15 +29,9 @@ define ['init', 'backbone.marionette', 'models/user'], (App, Marionette, User) -
       @close()
     itemCreated: (event) ->
       event.preventDefault()
-      console.log 'user created'
-      console.log this.$el.find('form')
       new_user = new User
 
-      console.log 'JSON.stringify('
-      console.log this.getFormData( this.$el.find('form') )
       new_user.set(this.getFormData(this.$el.find('form')))
-      console.log 'new_user'
-      console.log new_user
       new_user.save()
 
       @close()

@@ -31,7 +31,8 @@ define ['init', 'backbone.marionette', 'models/unit', 'models/local_storage'], (
       event.preventDefault()
       new_unit = new Unit
       new_unit.set(this.getFormData(this.$el.find('form')))
-      new_unit.save()
+      new_unit.save
+        authentication_token: Storage.get("API_KEY")
 
       @close()
 
@@ -47,7 +48,6 @@ define ['init', 'backbone.marionette', 'models/unit', 'models/local_storage'], (
         indexed_array[n['name']] = n['value']
       )
 
-      indexed_array['authenticity_token']= Storage.get('API_KEY')
       indexed_array
 
   UnitsView
