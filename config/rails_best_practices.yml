@@ -1,6 +1,6 @@
 AddModelVirtualAttributeCheck: { }
 AlwaysAddDbIndexCheck: { }
-CheckSaveReturnValueCheck: { }
+#CheckSaveReturnValueCheck: { }
 DryBundlerInCapistranoCheck: { }
 HashSyntaxCheck: { }
 IsolateSeedDataCheck: { }
@@ -21,7 +21,10 @@ ProtectMassAssignmentCheck: { }
 RemoveEmptyHelpersCheck: { }
 RemoveTabCheck: { }
 RemoveTrailingWhitespaceCheck: { }
-RemoveUnusedMethodsInControllersCheck: { except_methods: ['UnitsController#unit_params'] }
+RemoveUnusedMethodsInControllersCheck:
+  except_methods:
+    - UnitsController#unit_params
+    - LocationsController#location_params
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
 RemoveUnusedMethodsInModelsCheck: { except_methods: [] }
 ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }
