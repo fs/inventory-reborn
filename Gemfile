@@ -26,14 +26,17 @@ group :development do
   gem 'rb-fsevent', require: false
   gem 'zeus'
   gem 'rails-erd'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
 end
 
 group :development, :test do
-  gem 'debugger'
   gem 'rspec-rails'
   gem 'mail_safe'
   gem 'rails_best_practices'
   gem 'brakeman'
+  gem 'pry-rails'
+  gem 'pry-debugger'
 end
 
 group :test do
